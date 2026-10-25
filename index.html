@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;sha256-JGfonFjcu50Li6kvdJYCKCmi99Q0/bsIpI44FNSub9s=&#x27;; style-src &#x27;sha256-mz80+Ix5tdri8X9Ep9VE45qsrF67/Kb584WTBhxGcEM=&#x27;; font-src &#x27;self&#x27;; img-src &#x27;self&#x27;; connect-src https://relay-ofertas-manuel.lauramuri04.workers.dev; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Ofertas · búsqueda de empleo</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>@font-face{font-family:"Inter";src:url("fonts/InterVariable.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+:root{--pri:#4f46e5;--pri-2:#4338ca;--pri-suave:#eef2ff;--fondo:#f5f6fb;--tarjeta:#fff;--texto:#111827;--suave:#5b6474;--borde:#e5e7eb;--sombra:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.07);--alto:#15803d;--alto-bg:#dcfce7;--medio:#b45309;--medio-bg:#fef3c7;--bajo:#6b7280;--bajo-bg:#f3f4f6;--peligro:#b91c1c;--radio:14px;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--pri:#818cf8;--pri-2:#a5b4fc;--pri-suave:#1e1b4b;--fondo:#0b0f19;--tarjeta:#141a2a;--texto:#e5e7eb;--suave:#a1a9b8;--borde:#273046;--sombra:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35);--alto:#4ade80;--alto-bg:#052e16;--medio:#fbbf24;--medio-bg:#3b2a05;--bajo:#9ca3af;--bajo-bg:#1f2937;--peligro:#f87171}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--fondo);color:var(--texto);font-size:15px;line-height:1.45}
+a{color:var(--pri)}
+.envoltura{max-width:1200px;margin:0 auto;padding:16px}
+header.cab{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+header.cab h1{font-size:22px;margin:0;letter-spacing:-.01em}
+.cab-meta{color:var(--suave);font-size:13px;display:flex;flex-wrap:wrap;gap:4px 12px}
+nav.pestanas{display:flex;gap:4px;background:var(--tarjeta);padding:4px;border-radius:12px;box-shadow:var(--sombra);margin-bottom:16px;overflow-x:auto}
+nav.pestanas button{flex:1;border:0;background:transparent;color:var(--suave);font:inherit;font-weight:600;padding:9px 12px;border-radius:9px;cursor:pointer;white-space:nowrap}
+nav.pestanas button[aria-selected=true]{background:var(--pri);color:#fff}
+@media (prefers-color-scheme:dark){nav.pestanas button[aria-selected=true]{color:#0b0f19}}
+section.panel[hidden]{display:none}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--tarjeta);border-radius:var(--radio);box-shadow:var(--sombra);padding:12px 14px}
+.kpi b{display:block;font-size:24px;letter-spacing:-.02em}
+.kpi span{color:var(--suave);font-size:12.5px}
+.controles{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--borde);background:var(--tarjeta);color:var(--texto);border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--pri);border-color:var(--pri);color:#fff}
+@media (prefers-color-scheme:dark){.chip[aria-pressed=true]{color:#0b0f19}}
+input[type=search],select{font:inherit;font-size:14px;padding:7px 10px;border:1px solid var(--borde);border-radius:10px;background:var(--tarjeta);color:var(--texto)}
+input[type=search]{flex:1;min-width:160px}
+.vista-sel{display:inline-flex;border:1px solid var(--borde);border-radius:10px;overflow:hidden}
+.vista-sel button{border:0;background:var(--tarjeta);color:var(--suave);font:inherit;font-size:13px;padding:7px 11px;cursor:pointer}
+.vista-sel button[aria-pressed=true]{background:var(--pri-suave);color:var(--pri);font-weight:600}
+.nota{color:var(--suave);font-size:13px;margin:6px 0 12px}
+.lista-ofertas.tarjetas{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.oferta{background:var(--tarjeta);border-radius:var(--radio);box-shadow:var(--sombra);border-left:5px solid var(--bajo);padding:14px;display:flex;flex-direction:column;gap:8px;transition:opacity .45s ease,transform .45s ease}
+.oferta.enc-alto{border-left-color:var(--alto)}.oferta.enc-medio{border-left-color:var(--medio)}
+.oferta h3{font-size:16px;margin:0;line-height:1.3}
+.oferta .empresa{font-weight:600;color:var(--suave);font-size:13.5px}
+.badges{display:flex;flex-wrap:wrap;gap:5px}
+.badge{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:var(--pri-suave);color:var(--pri)}
+.badge.alto{background:var(--alto-bg);color:var(--alto)}.badge.medio{background:var(--medio-bg);color:var(--medio)}.badge.bajo{background:var(--bajo-bg);color:var(--bajo)}
+.badge.gris{background:var(--bajo-bg);color:var(--suave)}.badge.nueva{background:var(--pri);color:#fff}.badge.aviso{background:#fee2e2;color:#991b1b}
+@media (prefers-color-scheme:dark){.badge.nueva{color:#0b0f19}.badge.aviso{background:#450a0a;color:#fca5a5}}
+.motivo{font-size:13.5px;margin:0}
+.meta{font-size:12.5px;color:var(--suave)}
+.acciones{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.btn{position:relative;border:1px solid var(--borde);background:var(--tarjeta);color:var(--texto);font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:10px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;min-height:36px}
+.btn.prim{background:var(--pri);border-color:var(--pri);color:#fff}
+@media (prefers-color-scheme:dark){.btn.prim{color:#0b0f19}}
+.btn.peligro{color:var(--peligro)}
+.btn[disabled]{opacity:.6;cursor:progress}
+.btn.enviando::after{content:"";width:12px;height:12px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:gira .7s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.estado-envio{font-size:12.5px;color:var(--alto);margin:0}
+.estado-envio.error{color:var(--peligro)}
+.oferta.saliendo{opacity:.35;transform:translateY(6px)}
+.lista-ofertas.lista{display:flex;flex-direction:column;gap:6px}
+.lista-ofertas.lista .oferta{display:grid;grid-template-columns:minmax(200px,1.3fr) minmax(160px,1fr) auto;grid-template-areas:"tit badges acc" "mot mot acc";gap:4px 14px;padding:10px 12px;align-items:center}
+.lista-ofertas.lista .oferta .tit{grid-area:tit}.lista-ofertas.lista .oferta .badges{grid-area:badges}
+.lista-ofertas.lista .oferta .cuerpo{grid-area:mot}.lista-ofertas.lista .oferta .acciones{grid-area:acc;margin:0;justify-content:flex-end}
+@media (max-width:760px){.lista-ofertas.lista .oferta{grid-template-columns:1fr;grid-template-areas:"tit" "badges" "mot" "acc"}.lista-ofertas.lista .oferta .acciones{justify-content:flex-start}}
+.vacio{background:var(--tarjeta);border:1px dashed var(--borde);border-radius:var(--radio);padding:24px;text-align:center;color:var(--suave)}
+.kanban{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);gap:10px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.col{background:var(--pri-suave);border-radius:var(--radio);padding:10px;scroll-snap-align:start;min-height:120px}
+@media (prefers-color-scheme:dark){.col{background:#111729}}
+.col h3{font-size:13px;margin:0 0 8px;display:flex;justify-content:space-between;color:var(--suave);text-transform:uppercase;letter-spacing:.04em}
+.col .oferta{margin-bottom:8px;padding:10px;gap:6px}
+.col .vacio{padding:12px;font-size:12.5px}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.caja{background:var(--tarjeta);border-radius:var(--radio);box-shadow:var(--sombra);padding:14px}
+.caja h3{font-size:14px;margin:0 0 10px}
+.caja svg{width:100%;height:auto;display:block}
+.sin-datos{color:var(--suave);font-size:13px;font-style:italic}
+svg text{fill:var(--texto);font-family:inherit;font-size:11px}
+svg .t-suave{fill:var(--suave)}
+svg .b-pri{fill:var(--pri)}svg .b-alto{fill:var(--alto)}svg .b-medio{fill:var(--medio)}svg .b-bajo{fill:var(--bajo)}svg .b-fondo{fill:var(--borde)}
+svg .l-obj{stroke:var(--texto);stroke-width:2;stroke-dasharray:3 3}
+ul.avisos{margin:0;padding-left:18px;font-size:13.5px}
+dialog{border:0;border-radius:16px;padding:18px;max-width:440px;width:calc(100% - 32px);background:var(--tarjeta);color:var(--texto);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(15,23,42,.5)}
+dialog h2{font-size:17px;margin:0 0 4px}
+dialog textarea{width:100%;min-height:80px;font:inherit;font-size:14px;padding:8px;border:1px solid var(--borde);border-radius:10px;background:var(--fondo);color:var(--texto);margin:10px 0}
+.dlg-pie{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.cerrar-x{position:absolute;top:10px;right:10px;border:0;background:transparent;color:var(--suave);font-size:20px;cursor:pointer;line-height:1}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(30px);opacity:0;background:var(--texto);color:var(--fondo);padding:10px 16px;border-radius:12px;font-weight:600;font-size:14px;transition:all .25s ease;pointer-events:none;max-width:calc(100% - 32px);text-align:center;z-index:10}
+#toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}
+.oculto{display:none!important}
+footer{color:var(--suave);font-size:12px;margin:24px 0 8px;text-align:center}
+.oculto-copia{position:fixed;top:-1000px;left:-1000px;opacity:0}
+svg .d-b-alto{stroke:var(--alto)}svg .d-b-medio{stroke:var(--medio)}svg .d-b-bajo{stroke:var(--bajo)}
+</style>
+</head>
+<body data-relay="https://relay-ofertas-manuel.lauramuri04.workers.dev" data-build="2026-10-25">
+<div class="envoltura">
+<header class="cab"><h1>Ofertas SDR / BDR</h1>
+<div class="cab-meta"><span>Actualizado el domingo 25 de octubre de 2026</span><span>Se actualiza una vez al día</span><a href="https://docs.google.com/spreadsheets/d/1uRjFrI5Fm3j0QvyP-X0izm37_f-Q0X6h4gUXFT53pqQ/edit" target="_blank" rel="noopener noreferrer">Abrir la hoja</a></div></header>
+<nav class="pestanas" role="tablist">
+<button type="button" role="tab" data-tab="ofertas" aria-controls="p-ofertas" aria-selected="true">Ofertas</button>
+<button type="button" role="tab" data-tab="postulaciones" aria-controls="p-postulaciones" aria-selected="false">Postulaciones</button>
+<button type="button" role="tab" data-tab="estadisticas" aria-controls="p-estadisticas" aria-selected="false">Estadísticas</button>
+</nav>
+<section class="panel" id="p-ofertas" role="tabpanel">
+<div class="kpis"><div class="kpi"><b>8</b><span>Nuevas hoy (Alto+Medio)</span></div><div class="kpi"><b>8</b><span>Por revisar</span></div><div class="kpi"><b>3</b><span>Encaje alto</span></div><div class="kpi"><b>SDR 5 · BDR 3</b><span>Tipo de rol · objetivo: indiferente</span></div></div>
+<div class="controles"><div class="chips" role="group" aria-label="Filtros"><button type="button" class="chip" data-filtro="todas" aria-pressed="true">Todas</button><button type="button" class="chip" data-filtro="alto" aria-pressed="false">Alto</button><button type="button" class="chip" data-filtro="medio" aria-pressed="false">Medio</button><button type="button" class="chip" data-filtro="sdr" aria-pressed="false">SDR</button><button type="button" class="chip" data-filtro="bdr" aria-pressed="false">BDR</button><button type="button" class="chip" data-filtro="nuevas" aria-pressed="false">Nuevas</button><button type="button" class="chip" data-filtro="por-aplicar" aria-pressed="false">Por aplicar</button></div></div>
+<div class="controles"><input type="search" id="buscar" placeholder="Buscar empresa, cargo, ubicación…" aria-label="Buscar">
+<select id="orden" aria-label="Ordenar"><option value="encaje">Orden: encaje</option><option value="fecha">Orden: más recientes</option><option value="empresa">Orden: empresa A-Z</option></select>
+<div class="vista-sel" role="group" aria-label="Vista"><button type="button" data-vista="tarjetas" aria-pressed="true">Tarjetas</button><button type="button" data-vista="lista" aria-pressed="false">Lista</button></div></div>
+<p class="nota">Solo se muestran encajes Alto y Medio. 9 ofertas de encaje Bajo ocultas (están en la hoja).</p>
+
+<div id="lista-ofertas" class="lista-ofertas tarjetas"><article class="oferta enc-alto" data-id="OF-0001" data-empresa="OpenText" data-cargo="Enterprise Sales Development Representative - Spanish Speaking" data-encaje="Alto" data-rol="SDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="opentext enterprise sales development representative - spanish speaking madrid (modalidad no indicada) sdr hispanohablante en software b2b global (+20.000 empl.); no exige experiencia previa en ventas; modalidad y contrato a confirmar"><div class="tit"><div class="empresa">OpenText</div><h3>Enterprise Sales Development Representative - Spanish Speaking</h3></div><div class="badges"><span class="badge alto">Alto</span><span class="badge ">SDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">SDR hispanohablante en software B2B global (+20.000 empl.); no exige experiencia previa en ventas; modalidad y contrato a confirmar</p><div class="meta">Madrid (modalidad no indicada) · LinkedIn · 2026-10-25 · OF-0001</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://es.linkedin.com/jobs/view/enterprise-sales-development-representative-spanish-speaking-at-opentext-4480046274" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article><article class="oferta enc-alto" data-id="OF-0002" data-empresa="Keyfactor" data-cargo="Sales Development Representative Iberia Market" data-encaje="Alto" data-rol="SDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="keyfactor sales development representative iberia market madrid o barcelona (modalidad no indicada) sdr mercado iberico, espanol nativo; pide 1+ ano en ventas, atencion al cliente o rol relacionado; ciberseguridad saas; modalidad a confirmar"><div class="tit"><div class="empresa">Keyfactor</div><h3>Sales Development Representative Iberia Market</h3></div><div class="badges"><span class="badge alto">Alto</span><span class="badge ">SDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">SDR mercado ibérico, español nativo; pide 1+ año en ventas, atención al cliente o rol relacionado; ciberseguridad SaaS; modalidad a confirmar</p><div class="meta">Madrid o Barcelona (modalidad no indicada) · Web empresa (Greenhouse) · 2026-10-25 · OF-0002</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://job-boards.greenhouse.io/keyfactorinc/jobs/6225622004" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article><article class="oferta enc-alto" data-id="OF-0003" data-empresa="Cabify" data-cargo="Sales Development Representative" data-encaje="Alto" data-rol="SDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="cabify sales development representative madrid (modalidad no indicada) sdr b2b, contrato indefinido explicito, +1.000 empl.; pide 6 meses-1 ano en ventas/telemarketing (preferible b2b); modalidad a confirmar"><div class="tit"><div class="empresa">Cabify</div><h3>Sales Development Representative</h3></div><div class="badges"><span class="badge alto">Alto</span><span class="badge ">SDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">SDR B2B, contrato indefinido explícito, +1.000 empl.; pide 6 meses-1 año en ventas/telemarketing (preferible B2B); modalidad a confirmar</p><div class="meta">Madrid (modalidad no indicada) · Web empresa (Greenhouse) · 2026-10-25 · OF-0003</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://job-boards.greenhouse.io/cabify/jobs/8888755002" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article><article class="oferta enc-medio" data-id="OF-0004" data-empresa="Vonage" data-cargo="Sales Development Representative (API / CPaaS)" data-encaje="Medio" data-rol="SDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="vonage sales development representative (api / cpaas) madrid, hibrido (1 dia oficina) hibrido y espanol+ingles encajan; exige 2-3 anos de ventas outbound que el perfil no tiene; contrato no indicado"><div class="tit"><div class="empresa">Vonage</div><h3>Sales Development Representative (API / CPaaS)</h3></div><div class="badges"><span class="badge medio">Medio</span><span class="badge ">SDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">Híbrido y español+inglés encajan; exige 2-3 años de ventas outbound que el perfil no tiene; contrato no indicado</p><div class="meta">Madrid, híbrido (1 día oficina) · Web empresa (Greenhouse) · 2026-10-25 · OF-0004</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://job-boards.greenhouse.io/vonage/jobs/8760662002" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article><article class="oferta enc-medio" data-id="OF-0005" data-empresa="GitLab" data-cargo="Business Development Representative, Spanish Speaking" data-encaje="Medio" data-rol="BDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="gitlab business development representative, spanish speaking espana, 100% remoto remoto desde espana y hispanohablante encajan; exige experiencia previa como sdr/bdr outbound en tecnologia"><div class="tit"><div class="empresa">GitLab</div><h3>Business Development Representative, Spanish Speaking</h3></div><div class="badges"><span class="badge medio">Medio</span><span class="badge ">BDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">Remoto desde España y hispanohablante encajan; exige experiencia previa como SDR/BDR outbound en tecnología</p><div class="meta">España, 100% remoto · Web empresa (Greenhouse) · 2026-10-25 · OF-0005</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://job-boards.greenhouse.io/gitlab/jobs/8882367002" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article><article class="oferta enc-medio" data-id="OF-0006" data-empresa="Wiz" data-cargo="Business Development Representative" data-encaje="Medio" data-rol="BDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="wiz business development representative madrid (modalidad no indicada) bdr ciberseguridad cloud, espanol+ingles; exige 1-2 anos en ventas con objetivos; modalidad a confirmar"><div class="tit"><div class="empresa">Wiz</div><h3>Business Development Representative</h3></div><div class="badges"><span class="badge medio">Medio</span><span class="badge ">BDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">BDR ciberseguridad cloud, español+inglés; exige 1-2 años en ventas con objetivos; modalidad a confirmar</p><div class="meta">Madrid (modalidad no indicada) · Web empresa · 2026-10-25 · OF-0006</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://www.wiz.io/careers/job/4720625006/business-development-representative" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article><article class="oferta enc-medio" data-id="OF-0007" data-empresa="Aircall" data-cargo="Business Development Representative (BDR), Iberia Market" data-encaje="Medio" data-rol="BDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="aircall business development representative (bdr), iberia market madrid office (modalidad no indicada) bdr mercado iberico, abierto a perfiles sin experiencia comercial; ubicacion &quot;madrid office&quot; sin mencion de hibrido: confirmar que no es 100% presencial"><div class="tit"><div class="empresa">Aircall</div><h3>Business Development Representative (BDR), Iberia Market</h3></div><div class="badges"><span class="badge medio">Medio</span><span class="badge ">BDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">BDR mercado ibérico, abierto a perfiles sin experiencia comercial; ubicación &quot;Madrid Office&quot; sin mención de híbrido: confirmar que no es 100% presencial</p><div class="meta">Madrid Office (modalidad no indicada) · Web empresa (Greenhouse) · 2026-10-25 · OF-0007</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://job-boards.greenhouse.io/aircallioinc/jobs/4450140009" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article><article class="oferta enc-medio" data-id="OF-0008" data-empresa="Embat" data-cargo="Sales Development Representative (SDR) - Spain" data-encaje="Medio" data-rol="SDR" data-fecha="2026-10-25" data-nueva="1" data-fase="nueva" data-salida="0" data-busca="embat sales development representative (sdr) - spain madrid, hibrido (40% remoto) fintech saas b2b, mercado espanol, hibrido; exige 2+ anos de sdr outbound; tamano de empresa (&gt;=100) no confirmado"><div class="tit"><div class="empresa">Embat</div><h3>Sales Development Representative (SDR) - Spain</h3></div><div class="badges"><span class="badge medio">Medio</span><span class="badge ">SDR</span><span class="badge gris">Salario no publicado</span><span class="badge nueva">Nueva</span></div><div class="cuerpo"><p class="motivo">Fintech SaaS B2B, mercado español, híbrido; exige 2+ años de SDR outbound; tamaño de empresa (&gt;=100) no confirmado</p><div class="meta">Madrid, híbrido (40% remoto) · LinkedIn · 2026-10-25 · OF-0008</div></div><div class="acciones"><button type="button" class="btn prim" data-accion="aplicar">Aplicar</button><a class="btn" href="https://es.linkedin.com/jobs/view/sales-development-representative-sdr-spain-at-embat-4481092127" target="_blank" rel="noopener noreferrer">Ver oferta</a><button type="button" class="btn peligro" data-accion="descartar">Descartar</button></div></article></div>
+<div id="vacio-filtro" class="vacio oculto">Ninguna oferta coincide con el filtro o la búsqueda.</div>
+</section>
+<section class="panel" id="p-postulaciones" role="tabpanel" hidden>
+<p class="nota">Aún no hay postulaciones. Aparecerán aquí cuando pulses Aplicar en una oferta.</p><div class="kanban"><div class="col"><h3><span>Por aplicar</span><span>0</span></h3><div class=vacio>Vacío</div></div><div class="col"><h3><span>Aplicada</span><span>0</span></h3><div class=vacio>Vacío</div></div><div class="col"><h3><span>Primer contacto</span><span>0</span></h3><div class=vacio>Vacío</div></div><div class="col"><h3><span>Entrevistas</span><span>0</span></h3><div class=vacio>Vacío</div></div><div class="col"><h3><span>Oferta</span><span>0</span></h3><div class=vacio>Vacío</div></div><div class="col"><h3><span>En pausa</span><span>0</span></h3><div class=vacio>Vacío</div></div><div class="col"><h3><span>Cerradas</span><span>0</span></h3><div class=vacio>Vacío</div></div></div>
+</section>
+<section class="panel" id="p-estadisticas" role="tabpanel" hidden>
+<div class="kpis"><div class="kpi"><b>0 %</b><span>Tasa de aplicación (aplicadas / ofertas Alto+Medio)</span></div><div class="kpi"><b>sin datos</b><span>Tasa de respuesta</span></div><div class="kpi"><b>sin datos</b><span>Mediana hasta primer contacto</span></div><div class="kpi"><b>sin datos</b><span>Entrevistas activas</span></div></div><div class="stats"><div class="caja"><h3>Embudo</h3><svg viewBox="0 0 320 32" role="img" aria-label="gráfico de barras"><text x="0" y="15">Ofertas A+M</text><rect class="b-fondo" x="110" y="2" width="150" height="18" rx="4"/><rect class="b-pri" x="110" y="2" width="150" height="18" rx="4"/><text x="266" y="15">8</text></svg><p class="sin-datos">sin postulaciones todavía: % entre etapas sin datos</p></div><div class="caja"><h3>Tendencia (8 semanas)</h3><svg viewBox="0 0 320 150" role="img" aria-label="tendencia 8 semanas"><rect class="b-pri" x="10.0" y="120" width="14.8" height="0" rx="2"/><rect class="b-alto" x="25.8" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="25.8" y="134" text-anchor="middle">31/8</text><rect class="b-pri" x="47.5" y="120" width="14.8" height="0" rx="2"/><rect class="b-alto" x="63.2" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="63.2" y="134" text-anchor="middle">7/9</text><rect class="b-pri" x="85.0" y="120" width="14.8" height="0" rx="2"/><rect class="b-alto" x="100.8" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="100.8" y="134" text-anchor="middle">14/9</text><rect class="b-pri" x="122.5" y="120" width="14.8" height="0" rx="2"/><rect class="b-alto" x="138.2" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="138.2" y="134" text-anchor="middle">21/9</text><rect class="b-pri" x="160.0" y="120" width="14.8" height="0" rx="2"/><rect class="b-alto" x="175.8" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="175.8" y="134" text-anchor="middle">28/9</text><rect class="b-pri" x="197.5" y="120" width="14.8" height="0" rx="2"/><rect class="b-alto" x="213.2" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="213.2" y="134" text-anchor="middle">5/10</text><rect class="b-pri" x="235.0" y="120" width="14.8" height="0" rx="2"/><rect class="b-alto" x="250.8" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="250.8" y="134" text-anchor="middle">12/10</text><rect class="b-pri" x="272.5" y="30" width="14.8" height="90" rx="2"/><text x="280.4" y="27" text-anchor="middle">8</text><rect class="b-alto" x="288.2" y="120" width="14.8" height="0" rx="2"/><text class="t-suave" x="288.2" y="134" text-anchor="middle">19/10</text><rect class="b-pri" x="10" y="139" width="10" height="10" rx="2"/><text x="24" y="148">Ofertas A+M nuevas</text><rect class="b-alto" x="130" y="139" width="10" height="10" rx="2"/><text x="144" y="148">Aplicaciones</text></svg></div><div class="caja"><h3>Reparto por tipo de rol (Alto+Medio)</h3><svg viewBox="0 0 320 60" role="img" aria-label="gráfico de barras"><text x="0" y="15">BDR</text><rect class="b-fondo" x="110" y="2" width="150" height="18" rx="4"/><rect class="b-pri" x="110" y="2" width="90" height="18" rx="4"/><text x="266" y="15">3</text><text x="0" y="43">SDR</text><rect class="b-fondo" x="110" y="30" width="150" height="18" rx="4"/><rect class="b-pri" x="110" y="30" width="150" height="18" rx="4"/><text x="266" y="43">5</text></svg><p class="nota">Objetivo: indiferente (criterios.md)</p></div><div class="caja"><h3>Motivos de descarte</h3><p class="sin-datos">sin datos</p></div><div class="caja"><h3>Encaje de todas las ofertas</h3><svg viewBox="0 0 320 130" role="img" aria-label="donut de encaje"><circle cx="65" cy="65" r="52" fill="none" class="d-b-alto" stroke-width="20" stroke-dasharray="57.66 269.07" stroke-dashoffset="-0.00" transform="rotate(-90 65 65)"/><circle cx="65" cy="65" r="52" fill="none" class="d-b-medio" stroke-width="20" stroke-dasharray="96.10 230.63" stroke-dashoffset="-57.66" transform="rotate(-90 65 65)"/><circle cx="65" cy="65" r="52" fill="none" class="d-b-bajo" stroke-width="20" stroke-dasharray="172.97 153.75" stroke-dashoffset="-153.75" transform="rotate(-90 65 65)"/><text x="65" y="70" text-anchor="middle">17</text><rect class="b-alto" x="150" y="20" width="12" height="12" rx="3"/><text x="170" y="30">Alto: 3 (18 %)</text><rect class="b-medio" x="150" y="46" width="12" height="12" rx="3"/><text x="170" y="56">Medio: 5 (29 %)</text><rect class="b-bajo" x="150" y="72" width="12" height="12" rx="3"/><text x="170" y="82">Bajo: 9 (53 %)</text></svg></div><div class="caja"><h3>Avisos de patrones (solo propuestas)</h3><ul class="avisos"><li>Dato: 3 de 9 ofertas Bajo lo son por salario base publicado &lt; 40.000 EUR. Solo informativo.</li><li>Dato: 5 de 8 ofertas Alto/Medio piden experiencia previa en ventas/SDR. Propuesta: preparar un párrafo de logros comerciales transferibles para los CV a medida.</li></ul></div></div>
+</section>
+<footer>Página generada automáticamente desde la hoja · solo datos reales · sin datos de contacto</footer>
+</div>
+<dialog id="dlg-motivo" aria-labelledby="dlg-titulo">
+<button type="button" class="cerrar-x" id="dlg-x" aria-label="Cerrar">×</button>
+<h2 id="dlg-titulo">Motivo</h2><p class="nota">Opcional. Si cierras, se envía sin comentario.</p>
+<div class="chips"><button type="button" class="chip" data-motivo="Salario bajo" aria-pressed="false">Salario bajo</button><button type="button" class="chip" data-motivo="Modalidad / presencialidad" aria-pressed="false">Modalidad / presencialidad</button><button type="button" class="chip" data-motivo="Ubicación" aria-pressed="false">Ubicación</button><button type="button" class="chip" data-motivo="Piden más experiencia" aria-pressed="false">Piden más experiencia</button><button type="button" class="chip" data-motivo="Idioma" aria-pressed="false">Idioma</button><button type="button" class="chip" data-motivo="No es SDR/BDR" aria-pressed="false">No es SDR/BDR</button><button type="button" class="chip" data-motivo="Sector o empresa" aria-pressed="false">Sector o empresa</button><button type="button" class="chip" data-motivo="Contrato no indefinido" aria-pressed="false">Contrato no indefinido</button><button type="button" class="chip" data-motivo="Oferta cerrada" aria-pressed="false">Oferta cerrada</button><button type="button" class="chip" data-motivo="Proceso lento o sin respuesta" aria-pressed="false">Proceso lento o sin respuesta</button><button type="button" class="chip" data-motivo="Otro" aria-pressed="false">Otro</button></div>
+<textarea id="dlg-comentario" maxlength="1000" placeholder="Comentario (opcional)"></textarea>
+<div class="dlg-pie"><button type="button" class="btn" id="dlg-cerrar">Cerrar sin comentario</button><button type="button" class="btn prim" id="dlg-enviar">Enviar</button></div>
+</dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>(function () {
+  "use strict";
+  var B = document.body;
+  var RELAY = B.getAttribute("data-relay") || "";
+  var BUILD = B.getAttribute("data-build") || "";
+  var ORDEN = ["action", "empresa", "cargo", "id", "nuevo_estado", "motivos", "comentario", "cerrado_sin_comentario"];
+  var ETIQ = { aplicar: "Aplicar", descartar: "Descartar", ya_aplique: "Ya apliqué", no_aplique: "Al final no apliqué", cambiar_estado: "Cambio de estado" };
+  var CON_MODAL = ["Rechazada por la empresa", "Retirada por mí"];
+  var LS_VISTA = "ofertas.vista", LS_ENV = "ofertas.enviados." + BUILD;
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function lsGet(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  // ---- pestañas
+  var tabs = $$("nav.pestanas button");
+  function abrir(nombre) {
+    tabs.forEach(function (t) { var on = t.getAttribute("data-tab") === nombre; t.setAttribute("aria-selected", on ? "true" : "false"); $("#" + t.getAttribute("aria-controls")).hidden = !on; });
+  }
+  tabs.forEach(function (t) { t.addEventListener("click", function () { abrir(t.getAttribute("data-tab")); history.replaceState(null, "", "#" + t.getAttribute("data-tab")); }); });
+  var h = (location.hash || "").slice(1); if (h && $('nav.pestanas button[data-tab="' + h + '"]')) abrir(h);
+
+  // ---- toast
+  var toastT;
+  function toast(msg) { var t = $("#toast"); t.textContent = msg; t.classList.add("visible"); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove("visible"); }, 3200); }
+
+  // ---- vista Tarjetas / Lista (mismo elemento por oferta; solo cambia la clase del contenedor)
+  var cont = $("#lista-ofertas");
+  function vista(v) {
+    if (!cont) return;
+    cont.classList.toggle("tarjetas", v !== "lista"); cont.classList.toggle("lista", v === "lista");
+    $$(".vista-sel button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-vista") === v ? "true" : "false"); });
+    lsSet(LS_VISTA, v);
+  }
+  $$(".vista-sel button").forEach(function (b) { b.addEventListener("click", function () { vista(b.getAttribute("data-vista")); }); });
+  vista(lsGet(LS_VISTA, "tarjetas") === "lista" ? "lista" : "tarjetas");
+
+  // ---- filtros, búsqueda, orden
+  var filtro = "todas", q = "";
+  var RANGO = { Alto: 0, Medio: 1, Bajo: 2 };
+  function aplicarFiltros() {
+    if (!cont) return;
+    var vis = 0;
+    $$(".oferta", cont).forEach(function (el) {
+      var d = el.dataset, ok = true;
+      if (filtro === "alto") ok = d.encaje === "Alto"; else if (filtro === "medio") ok = d.encaje === "Medio";
+      else if (filtro === "sdr") ok = d.rol === "SDR"; else if (filtro === "bdr") ok = d.rol === "BDR";
+      else if (filtro === "nuevas") ok = d.nueva === "1"; else if (filtro === "por-aplicar") ok = d.fase === "por_aplicar";
+      if (ok && q) ok = (d.busca || "").indexOf(q) !== -1;
+      el.classList.toggle("oculto", !ok); if (ok) vis++;
+    });
+    $("#vacio-filtro").classList.toggle("oculto", vis !== 0 || $$(".oferta", cont).length === 0);
+  }
+  function ordenar(modo) {
+    if (!cont) return;
+    var els = $$(".oferta", cont);
+    els.sort(function (a, b) {
+      var A = a.dataset, Bd = b.dataset;
+      if (A.salida !== Bd.salida) return A.salida === "1" ? 1 : -1;
+      if (modo === "fecha") return (Bd.fecha || "").localeCompare(A.fecha || "") || (RANGO[A.encaje] - RANGO[Bd.encaje]);
+      if (modo === "empresa") return A.empresa.localeCompare(Bd.empresa, "es");
+      return (RANGO[A.encaje] - RANGO[Bd.encaje]) || (Bd.fecha || "").localeCompare(A.fecha || "") || A.id.localeCompare(Bd.id);
+    });
+    els.forEach(function (e) { cont.appendChild(e); });
+  }
+  $$(".chip[data-filtro]").forEach(function (c) { c.addEventListener("click", function () { filtro = c.getAttribute("data-filtro"); $$(".chip[data-filtro]").forEach(function (x) { x.setAttribute("aria-pressed", x === c ? "true" : "false"); }); aplicarFiltros(); }); });
+  var bus = $("#buscar"); if (bus) bus.addEventListener("input", function () { q = bus.value.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); aplicarFiltros(); });
+  var ord = $("#orden"); if (ord) ord.addEventListener("change", function () { ordenar(ord.value); });
+
+  // ---- payload del contrato (orden de claves fijo)
+  function payload(el, action, extra) {
+    var o = { action: action, empresa: el.dataset.empresa, cargo: el.dataset.cargo, id: el.dataset.id };
+    extra = extra || {};
+    var r = {};
+    ORDEN.forEach(function (k) { if (k in o) r[k] = o[k]; else if (k in extra) r[k] = extra[k]; });
+    return JSON.stringify(r);
+  }
+  window.__payload = payload; // usado por el test headless
+
+  function copiar(texto) {
+    function viejo() {
+      var ta = document.createElement("textarea"); ta.value = texto; ta.setAttribute("readonly", ""); ta.className = "oculto-copia";
+      document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand("copy"); } catch (e) {} document.body.removeChild(ta); return ok;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(texto).then(function () { return true; }, function () { return viejo(); });
+    return Promise.resolve(viejo());
+  }
+  function fallback(body, el) {
+    var texto = "Orden de la página de ofertas: " + body;
+    return copiar(texto).then(function (ok) {
+      var msg = ok ? "No se pudo enviar. He copiado la orden al portapapeles: pégala en tu chat con el bot." : "No se pudo enviar ni copiar. Copia este texto y pégalo en tu chat: " + texto;
+      marcar(el, msg, true); toast(ok ? "Orden copiada al portapapeles" : "No se pudo enviar");
+      window.__ultimoFallback = { copiado: ok, texto: texto };
+    });
+  }
+  function marcar(el, msg, error) {
+    $$(".estado-envio", el).forEach(function (p) { p.remove(); });
+    var p = document.createElement("p"); p.className = "estado-envio" + (error ? " error" : ""); p.setAttribute("role", "status"); p.textContent = msg;
+    var acc = $(".acciones", el) || el; acc.parentNode.insertBefore(p, acc.nextSibling);
+  }
+  function enviar(el, action, extra, btn) {
+    var body = payload(el, action, extra);
+    window.__enviados = (window.__enviados || []).concat([body]);
+    var objetivo = btn || el;
+    objetivo.disabled = true; objetivo.classList.add("enviando");
+    var fin = function () { objetivo.disabled = false; objetivo.classList.remove("enviando"); };
+    if (!RELAY) { fin(); return fallback(body, el); }
+    return fetch(RELAY, { method: "POST", mode: "cors", credentials: "omit", cache: "no-store", headers: { "Content-Type": "application/json" }, body: body })
+      .then(function (r) {
+        fin();
+        if (!r.ok) throw new Error("http " + r.status);
+        var etq = action === "cambiar_estado" ? "Estado → " + extra.nuevo_estado : ETIQ[action];
+        marcar(el, "Recibido: " + etq + " · " + el.dataset.empresa + " — " + el.dataset.cargo + " (se actualiza mañana)", false);
+        toast("Guardado");
+        var env = lsGet(LS_ENV, {}); env[el.dataset.id] = etq; lsSet(LS_ENV, env);
+        if (action === "aplicar" || action === "descartar") salir(el);
+      })
+      .catch(function () { fin(); return fallback(body, el); });
+  }
+  function salir(el) {
+    if (!cont || el.parentNode !== cont) return;
+    el.classList.add("saliendo"); el.dataset.salida = "1";
+    setTimeout(function () { cont.appendChild(el); el.classList.remove("saliendo"); }, 450);
+  }
+
+  // ---- modal de retroalimentación
+  var dlg = $("#dlg-motivo"), dlgCtx = null, dlgEnviado = false;
+  function abrirModal(el, action, extra, btn) {
+    dlgCtx = { el: el, action: action, extra: extra || {}, btn: btn }; dlgEnviado = false;
+    $("#dlg-titulo").textContent = (action === "cambiar_estado" ? extra.nuevo_estado : ETIQ[action]) + " · " + el.dataset.empresa;
+    $$("#dlg-motivo .chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+    $("#dlg-comentario").value = "";
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  }
+  function cerrarModal(conComentario) {
+    if (!dlgCtx || dlgEnviado) return; dlgEnviado = true;
+    var ex = {}; Object.keys(dlgCtx.extra).forEach(function (k) { ex[k] = dlgCtx.extra[k]; });
+    if (conComentario) {
+      ex.motivos = $$("#dlg-motivo .chip").filter(function (c) { return c.getAttribute("aria-pressed") === "true"; }).map(function (c) { return c.getAttribute("data-motivo"); });
+      ex.comentario = $("#dlg-comentario").value.trim().slice(0, 1000);
+      ex.cerrado_sin_comentario = false;
+    } else { ex.cerrado_sin_comentario = true; }
+    var c = dlgCtx; dlgCtx = null;
+    if (dlg.open) dlg.close();
+    enviar(c.el, c.action, ex, c.btn);
+  }
+  if (dlg) {
+    $$("#dlg-motivo .chip").forEach(function (c) { c.addEventListener("click", function () { c.setAttribute("aria-pressed", c.getAttribute("aria-pressed") === "true" ? "false" : "true"); }); });
+    $("#dlg-enviar").addEventListener("click", function () { cerrarModal(true); });
+    $("#dlg-cerrar").addEventListener("click", function () { cerrarModal(false); });
+    $("#dlg-x").addEventListener("click", function () { cerrarModal(false); });
+    dlg.addEventListener("close", function () { cerrarModal(false); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) cerrarModal(false); });
+  }
+
+  // ---- botones (delegación; mismos manejadores en todas las vistas)
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest("button[data-accion]") : null; if (!b) return;
+    var el = b.closest("[data-id]"); if (!el) return;
+    var a = b.getAttribute("data-accion");
+    if (a === "descartar" || a === "no_aplique") abrirModal(el, a, {}, b); else enviar(el, a, {}, b);
+  });
+  $$("select[data-estado]").forEach(function (s) {
+    s.addEventListener("change", function () {
+      var el = s.closest("[data-id]"), v = s.value;
+      if (CON_MODAL.indexOf(v) !== -1) abrirModal(el, "cambiar_estado", { nuevo_estado: v }, s); else enviar(el, "cambiar_estado", { nuevo_estado: v }, s);
+    });
+  });
+
+  // ---- recordar lo enviado hoy (hasta la próxima build)
+  var env = lsGet(LS_ENV, {});
+  Object.keys(env).forEach(function (id) { $$('[data-id="' + id + '"]').forEach(function (el) { marcar(el, "Recibido: " + env[id] + " (se actualiza mañana)", false); }); });
+  ordenar("encaje"); aplicarFiltros();
+})();
+</script>
+</body>
+</html>
